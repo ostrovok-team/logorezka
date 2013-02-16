@@ -1,22 +1,23 @@
-package core
+package outputs
 
 import (
 	"bufio"
+	"logorezka/core"
 	"os"
 	"path"
 	"strings"
 )
 
-var NEW_LINE = []byte{0x0A}
-var PATH_SEP = string(os.PathSeparator)
+var new_line = []byte{0x0A}
+var path_sep = string(os.PathSeparator)
 
 var writers = make(map[string]*bufio.Writer)
 
-func OutputEvent(event *Event) {
+func OutputToFile(event *core.Event) {
 	output_path := strings.Join([]string{
-		ConfOutputFilesDir,
-		MakeFilenameSafe(event._source_host),
-		MakePathSafe(event._source_path)}, PATH_SEP)
+		core.ConfOutputFilesDir,
+		MakeFilenameSafe(event.Source_host),
+		MakePathSafe(event.Source_path)}, path_sep)
 
 	writer, ok := writers[output_path]
 	if !ok {
@@ -34,12 +35,12 @@ func OutputEvent(event *Event) {
 		writers[output_path] = writer
 	}
 
-	_, err := writer.Write(event._message)
+	_, err := writer.Write(event.Message)
 	if err != nil {
 		panic(err.Error())
 	}
 
-	_, err = writer.Write(NEW_LINE)
+	_, err = writer.Write(new_line)
 	if err != nil {
 		panic(err.Error())
 	}

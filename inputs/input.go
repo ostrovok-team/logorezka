@@ -1,9 +1,11 @@
-package core
+package inputs
 
 import (
 	"bytes"
 	zmq "github.com/alecthomas/gozmq"
 	msgpack "github.com/msgpack/msgpack-go"
+	"logorezka/core"
+	"logorezka/outputs"
 	"reflect"
 )
 
@@ -28,7 +30,7 @@ func InputRun() {
 		panic(err.Error())
 	}
 
-	err = socket.Bind(ConfInputZmqBind)
+	err = socket.Bind(core.ConfInputZmqBind)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -45,12 +47,12 @@ func InputRun() {
 			panic(err.Error())
 		}
 
-		event := Event{
-			_source_host: msgFieldAsString(&obj, "@source_host"),
-			_source_path: msgFieldAsString(&obj, "@source_path"),
-			_message:     msgFieldAsBytes(&obj, "@message"),
+		event := core.Event{
+			Source_host: msgFieldAsString(&obj, "@source_host"),
+			Source_path: msgFieldAsString(&obj, "@source_path"),
+			Message:     msgFieldAsBytes(&obj, "@message"),
 		}
 
-		OutputEvent(&event)
+		outputs.OutputEvent(&event)
 	}
 }

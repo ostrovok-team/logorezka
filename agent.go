@@ -1,8 +1,9 @@
 package main
 
 import "logorezka/core"
+import "logorezka/inputs"
 
 func main() {
 	core.ConfigParse()
-	core.InputRun()
+	inputs.InputRun()
 }
