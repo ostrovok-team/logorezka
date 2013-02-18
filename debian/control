@@ -1,0 +1,16 @@
+Source: logorezka
+Section: admin
+Priority: extra
+Maintainer: Denis Orlikhin <denis@ostrovok.ru>
+Build-Depends: debhelper (>= 8.0.0), golang, libzmq-dev
+Standards-Version: 3.9.3
+Homepage: https://github.com/overplumbum/logorezka
+Vcs-Git: git://github.com/overplumbum/logorezka.git
+Vcs-Browser: https://github.com/overplumbum/logorezka
+
+Package: logorezka
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, supervisor
+Description: Logs collector and aggregator
+ receives msgpacked events by ZeroMQ from log senders like beaver
+ and feeds them to files & elasticsearch
