@@ -50,7 +50,7 @@ func InputRun(outputs_list *[]outputs.Writer) {
 		event := core.Event{
 			Source_host: msgFieldAsString(&obj, "@source_host"),
 			Source_path: msgFieldAsString(&obj, "@source_path"),
-			Message:     msgFieldAsBytes(&obj, "@message"),
+			Message:     msgFieldAsString(&obj, "@message"),
 		}
 
 		outputs.Write(outputs_list, &event)

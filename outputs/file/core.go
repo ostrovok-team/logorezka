@@ -38,7 +38,7 @@ func (Output)Write(event *core.Event) {
 		writers[output_path] = writer
 	}
 
-	_, err := writer.Write(event.Message)
+	_, err := writer.Write([]byte(event.Message))
 	if err != nil {
 		panic(err.Error())
 	}
