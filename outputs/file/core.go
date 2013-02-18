@@ -1,4 +1,4 @@
-package outputs
+package file
 
 import (
 	"bufio"
@@ -13,7 +13,10 @@ var path_sep = string(os.PathSeparator)
 
 var writers = make(map[string]*bufio.Writer)
 
-func OutputToFile(event *core.Event) {
+// fake type to specify interface :(
+type Output int;
+
+func (Output)Write(event *core.Event) {
 	output_path := strings.Join([]string{
 		core.ConfOutputFilesDir,
 		MakeFilenameSafe(event.Source_host),

@@ -19,7 +19,7 @@ func msgFieldAsBytes(obj *reflect.Value, field_name string) []byte {
 	return field_obj.Interface().([]byte)
 }
 
-func InputRun() {
+func InputRun(outputs_list *[]outputs.Writer) {
 	context, err := zmq.NewContext()
 	if err != nil {
 		panic(err.Error())
@@ -53,6 +53,6 @@ func InputRun() {
 			Message:     msgFieldAsBytes(&obj, "@message"),
 		}
 
-		outputs.OutputEvent(&event)
+		outputs.Write(outputs_list, &event)
 	}
 }
