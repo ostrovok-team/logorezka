@@ -2,7 +2,6 @@ package core
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 func (event *Event)MarshalJSON() ([]byte, error) {
@@ -12,9 +11,7 @@ func (event *Event)MarshalJSON() ([]byte, error) {
 	dict["@message"] = event.Message
 	dict["@type"] = event.Type
 	dict["@timestamp"] = event.Timestamp
-	res, err := json.Marshal(dict)
-	fmt.Println(string(res))
-	return res, err
+	return json.Marshal(dict)
 }
 
 type Event struct {
