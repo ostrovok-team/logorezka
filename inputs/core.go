@@ -51,6 +51,8 @@ func InputRun(outputs_list *[]outputs.Writer) {
 			Source_host: msgFieldAsString(&obj, "@source_host"),
 			Source_path: msgFieldAsString(&obj, "@source_path"),
 			Message:     msgFieldAsString(&obj, "@message"),
+			Type:        msgFieldAsString(&obj, "@type"),
+			Timestamp:   msgFieldAsString(&obj, "@timestamp"),
 		}
 
 		outputs.Write(outputs_list, &event)
